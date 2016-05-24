@@ -12,3 +12,15 @@ juke.directive('sidebar', function(){
 		templateUrl: '/js/sidebar/sidebar.html'
 	}
 });
+
+juke.directive('songName', ['PlayerFactory', function(PlayerFactory){
+	return {
+		restrict: 'E',
+		link: function(scope){
+			scope.getCurrentSong = function() {
+                return PlayerFactory.getCurrentSong();
+            };
+		},
+		template: '<p>{{getCurrentSong().name}}</p>'
+	}
+}])

@@ -3,7 +3,8 @@ juke.directive('player', ['PlayerFactory', function(PlayerFactory) {
         restrict: 'E',
         templateUrl: '/js/player/player.html',
         link: function(scope, element, attributes) {
-        	console.log("i'm the scope: ", scope)
+            angular.extend(scope, PlayerFactory);
+        	
             scope.toggle = function() {
                 if (PlayerFactory.isPlaying()) PlayerFactory.pause();
                 else PlayerFactory.resume();
@@ -16,8 +17,7 @@ juke.directive('player', ['PlayerFactory', function(PlayerFactory) {
             scope.getCurrentSong = function() {
                 return PlayerFactory.getCurrentSong();
             };
-
-            
+ 
         }
     }
 }]);
