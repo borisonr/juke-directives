@@ -22,7 +22,7 @@ juke.controller('SongChooseCtrl', function($scope, SongFactory) {
 
 });
 
-juke.directive('songList', ['PlayerFactory', 'ArtistFactory', 'PlaylistFactory', function(PlayerFactory, ArtistFactory, PlaylistFactory) {
+juke.directive('songList', function(PlayerFactory, ArtistFactory, PlaylistFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -51,4 +51,18 @@ juke.directive('songList', ['PlayerFactory', 'ArtistFactory', 'PlaylistFactory',
         }
 
     }
-}])
+})
+
+juke.directive('doubleClick', function(){
+  return {
+    restrict: 'A',
+    scope: {
+      doubleClick: '&'
+    },
+    link: function(scope, element){
+      element.on('dblclick', function(){
+        scope.doubleClick();
+      })
+    }
+  }
+})
