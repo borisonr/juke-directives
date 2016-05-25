@@ -12,6 +12,7 @@ juke.factory('PlayerFactory', function ($rootScope) {
   // initialize the audio element
 
   var audio = document.createElement('audio');
+  // var progressBar = document.getElementsByClassName("progress")[0];
 
   // define the factory value
 
@@ -46,18 +47,18 @@ juke.factory('PlayerFactory', function ($rootScope) {
 
   function mod (num, m) { return ((num % m) + m) % m; };
 
-  function skip (interval) {
+  player.skip = function(interval) {
     var index = currentList.indexOf(currentSong);
     index = mod(index + interval, currentList.length);
     player.start(currentList[index], currentList);
   }
 
   player.next = function () {
-    skip(1);
+    player.skip(1);
   };
 
   player.previous = function () {
-    skip(-1);
+    player.skip(-1);
   };
 
   player.getProgress = function () {
@@ -76,6 +77,13 @@ juke.factory('PlayerFactory', function ($rootScope) {
     $rootScope.$evalAsync();
   });
 
+  // progressBar.onclick = function(){
+  //   //reassign progress based on where user clicked
+  //   //how do we know where they clicked?
+  //   console.log("I clicked here: " , event.clientX);
+  //    $rootScope.$evalAsync();
+
+  // };
   // return factory value
 
   return player;
